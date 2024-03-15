@@ -29,8 +29,8 @@ class _PageBottomNavigationBarState extends State<PageBottomNavigationBar>
       body: TabBarView(
         controller: tabController,
         children: const[
-          PageFormRegister(),
-          PageCustomGrid(),
+          FormRegister(),
+          CustomeGrid(),
           PageColumnRow()
         ],
       ),

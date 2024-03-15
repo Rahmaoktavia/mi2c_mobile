@@ -1,173 +1,161 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
-
-import 'dart:html';
-
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class PageFormRegister extends StatefulWidget {
-  const PageFormRegister({super.key});
-
+class FormRegister extends StatefulWidget {
+  const FormRegister({super.key});
   @override
-  State<PageFormRegister> createState() => _PageFormRegisterState();
+  State<FormRegister> createState() => _FormRegisterState();
 }
-
-class _PageFormRegisterState extends State<PageFormRegister> {
-  //untuk mendapatkan value dari text field
-  TextEditingController txtUsername = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
-  TextEditingController txtFullName = TextEditingController();
-  TextEditingController txtTglLahir = TextEditingController();
-  TextEditingController txtEmail = TextEditingController();
-
-  String? valAgam, valJk;
-  //validasi form
-  GlobalKey<FormState> keyForm= GlobalKey<FormState>();
-  //untuk datepicker
-  Future selectDate() async{
+class _FormRegisterState extends State<FormRegister> {
+  String? valAgama, valJk;
+  TextEditingController fullname = TextEditingController();
+  TextEditingController username = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController tglLahir = TextEditingController();
+  GlobalKey<FormState> keyForm = GlobalKey<FormState>();
+  Future selectDate() async {
     DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2100),
-    );
-    if(pickedDate != null){
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2100));
+    if (pickedDate != null) {
       setState(() {
-        txtTglLahir.text = DateFormat('dd-MM-yyyy').format(pickedDate);
+        tglLahir.text = DateFormat("dd-MM-yyyy").format(pickedDate);
       });
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Form Register"),
         backgroundColor: Colors.green,
-        title: Text('Form Register'),
       ),
-
       body: Form(
         key: keyForm,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 20,),
                 TextFormField(
-                  //validasi kosong
-                  validator: (val){
-                    return val!.isEmpty ? "tidak boleh kosong " : null;
+                  controller: fullname,
+                  validator: (val) {
+                    return val!.isEmpty ? "tidak boleh kosong" :
+                    null;
                   },
-                  controller: txtUsername,
                   decoration: InputDecoration(
-                      hintText: 'Fullname',
+                      hintText: "Fullname",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      )
-                  ),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
-                SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 TextFormField(
-                  //validasi kosong
-                  validator: (val){
-                    return val!.isEmpty ? "tidak boleh kosong " : null;
+                  controller: username,
+                  validator: (val) {
+                    return val!.isEmpty ? "tidak boleh kosong" :
+                    null;
                   },
-                  controller: txtFullName,
                   decoration: InputDecoration(
-                      hintText: 'Username',
+                      hintText: "Username",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      )
-                  ),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
-                SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 TextFormField(
-                  //validasi kosong
-                  validator: (val){
-                    return val!.isEmpty ? "tidak boleh kosong " : null;
+                  controller: email,
+                  validator: (val) {
+                    return val!.isEmpty ? "tidak boleh kosong" :
+                    null;
                   },
-                  controller: txtEmail,
                   decoration: InputDecoration(
-                      hintText: 'Email',
+                      hintText: "Email",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      )
-                  ),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
-                SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 TextFormField(
-                  onTap: (){
+                  onTap: () {
                     selectDate();
                   },
-                  validator: (val){
-                    return val!.isEmpty ? "tidak boleh kosong " : null;
+                  controller: tglLahir,
+                  validator: (val) {
+                    return val!.isEmpty ? "tidak boleh kosong" :
+                    null;
                   },
-                  controller: txtTglLahir,
                   decoration: InputDecoration(
-                      hintText: 'Tanggal Lahir',
+                      hintText: "Tanggal Lahir",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      )
-                  ),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
-                SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 TextFormField(
-                  validator: (val){
-                    return val!.isEmpty ? "tidak boleh kosong " : null;
+                  obscureText: true,
+                  controller: password,
+                  validator: (val) {
+                    return val!.isEmpty ? "tidak boleh kosong" :
+                    null;
                   },
-                  controller: txtPassword,
-                  obscureText: true,//biar password nya gak keliatan
                   decoration: InputDecoration(
-                      hintText: 'Password',
+                      hintText: "Password",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      )
-                  ),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
-
-                SizedBox(height: 10,),
+                const SizedBox(
+                  height: 8,
+                ),
                 Container(
                   alignment: Alignment.center,
                   height: 65,
                   decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 1, color: Colors.black
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                      border: Border.all(width: 1, color:
+                      Colors.black54),
+                      borderRadius: BorderRadius.circular(10)),
                   child: DropdownButton(
-                    value: valAgam,
-                    underline: Container(),
-                    isExpanded: true,
-                    hint: const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text('Pilih Agama'),
-                    ),
-                    items: [
-                      "Islam",
-                      "Kristen",
-                      "Protestan",
-                      "Budha"
-                    ].map((e){
-                      return DropdownMenuItem(
-                        value: e,
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Text(e),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (val){
-                      setState(() {
-                        valAgam = val;
-                        print('hasil agama: ${valAgam}');
-                      });
-                    },
-                  ),
+                      value: valAgama,
+                      underline: Container(),
+                      isExpanded: true,
+                      hint: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Pilih agama"),
+                      ),
+                      items: [
+                        "Islam",
+                        "Kristen Protestan",
+                        "Kristen Katolik",
+                        "Hindu",
+                        "Budha",
+                        "Konghucu"
+                      ].map((e) {
+                        return DropdownMenuItem(
+                          value: e,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(e),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (val) {
+                        setState(() {
+                          valAgama = val;
+                        });
+                      }),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -175,49 +163,77 @@ class _PageFormRegisterState extends State<PageFormRegister> {
                       child: RadioListTile(
                         value: "Laki-laki",
                         groupValue: valJk,
-                        onChanged: (val){
+                        onChanged: (val) {
                           setState(() {
                             valJk = val;
                           });
                         },
-                        activeColor: Colors.green,
-                        title: Text(
-                            'Laki-Laki'
-                        ),
+                        activeColor: Colors.blue,
+                        title: const Text("Laki-laki"),
                       ),
                     ),
                     Flexible(
-                      child: RadioListTile(
-                        value: "Perempuan",
-                        groupValue: valJk,
-                        onChanged: (val){
-                          setState(() {
-                            valJk = val;
-                          });
-                        },
-                        activeColor: Colors.green,
-                        title: Text(
-                            'Perempuan'
-                        ),
-                      ),
-                    ),
+                        child: RadioListTile(
+                          value: "Perempuan",
+                          groupValue: valJk,
+                          onChanged: (val) {
+                            setState(() {
+                              valJk = val;
+                            });
+                          },
+                          activeColor: Colors.green,
+                          title: const Text("Perempuan"),
+                        ))
                   ],
                 ),
-
-                SizedBox(height: 15,),
-                MaterialButton(onPressed: (){
-                  //cara get data dari text form field
-                  setState(() {
-                    String username = txtUsername.text;
-                    String pwd = txtPassword.text;
-
-                    print('Hasil login: ${username} dan pwd = ${pwd}');
-                  });
-
-                },
-                  child: Text('Simpan'),
+                const SizedBox(
+                  height: 25,
+                ),
+                MaterialButton(
                   color: Colors.green,
-                  textColor: Colors.white,
+                  minWidth: 200,
+                  height: 45,
+                  onPressed: () {
+                    if (keyForm.currentState?.validate() == true) {
+                      if (valJk != null && valAgama != null) {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text("Data Register"),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text("Fullname :${fullname.text}"),
+                                    Text("Username :${username.text}"),
+                                    Text("Email : ${email.text}"),
+                                    Text("Password :${password.text}"),
+                                    Text("Agama : $valAgama"),
+                                    Text("Jenis Kelamin : $valJk"),
+                                    Text("Tanggal Lahir :${tglLahir.text}")
+                                  ],
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text("Dismiss"))
+                                ],
+                              );
+                            });
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Pilih agama dan jenis kelamin"),
+                          backgroundColor: Colors.green,
+                        ));
+                      }
+                    }
+                  },
+                  child: const Text("SIMPAN"),
                 )
               ],
             ),
