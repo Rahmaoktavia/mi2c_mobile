@@ -15,19 +15,28 @@ class DetailGrid extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "Judul: ${movieDetails["judul"]}",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Center(
+              child: Image.asset(
+                "gambar/${movieDetails["gambar"]}",
+                width: 200,
+              ),
+            ),
+            SizedBox(height: 20),
+            Center(
+              child: Text(
+                "Judul: ${movieDetails["judul"]}",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
             SizedBox(height: 10),
-            Text(
-              "Harga: Rp. ${movieDetails["harga"]}",
-              style: TextStyle(fontSize: 16),
+            Center(
+              child: Text(
+                "Harga: Rp. ${movieDetails["harga"]}",
+                style: TextStyle(fontSize: 16),
+              ),
             ),
-            SizedBox(height: 10),
-            // Tambahkan detail lainnya di sini sesuai kebutuhan
           ],
         ),
       ),

@@ -117,7 +117,7 @@ class PageBeranda extends StatelessWidget {
                 ),
 
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 MaterialButton(
                   onPressed: () {
