@@ -1,3 +1,6 @@
+import 'package:coba/screen_page/page_list_berita.dart';
+import 'package:coba/screen_page/page_register_api.dart';
+import 'package:coba/screen_page/page_search_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:coba/screen_page/page_bottom_navigation.dart';
@@ -130,6 +133,63 @@ class PageBeranda extends StatelessWidget {
                   },
                   child: Text(
                     'Buttom Navigation Bar',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  color: Colors.green,
+                  textColor: Colors.white,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    //tambahkan code toast
+                    //ini kode untuk pindah page
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageSearchList ()));
+                  },
+                  child: Text(
+                    'Page Seacrh List',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  color: Colors.green,
+                  textColor: Colors.white,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    //tambahkan code toast
+                    //ini kode untuk pindah page
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageListBerita ()));
+                  },
+                  child: Text(
+                    'Page List Berita',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  color: Colors.green,
+                  textColor: Colors.white,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    //tambahkan code toast
+                    //ini kode untuk pindah page
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageRegisterApi ()));
+                  },
+                  child: Text(
+                    'Page Register Api',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                   ),
                   color: Colors.green,
